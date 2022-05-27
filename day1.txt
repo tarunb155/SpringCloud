@@ -1,141 +1,138 @@
-day 1 
-spring fast track : spring cloud
-
-prerequisite
---> spring core
---> spring boot
-
-software
---> jdk 1.8
+day1
+--> software setup
+--> java  (jdk1.8)
 --> eclipse
---> postman
 --> mysql
+--> postman
+--> vm
+--> command prompt --> java -version (jdk1.8)
+--> eclipse
 
-virtual machine (AWS)
-
-
-spring cloud
---> it is used to manage microservice
---> microservice which created with help of spring boot(spring rest)
---> we can manage microservice using many tools
---> suggestive list of topics
---> discovery server		==> done
---> feign			==> done
---> ribbon			==> done
---> actuators			==> done
---> zipkin
---> elk
---> api gateway
---> config server
---> hystrix
---> message broker --> rabbitmq
---> reactive microservices --> webflux
---> security --> basic, oauth2.0
---> deployment --> devops + cloud	--> deployment on aws
+programming paradigm
+--> procedure oriented programming --> procedure/method/function  c
+--> object oriented programming --> object, c++, java, .net, python, javascript
+--> functional programming --> function, java 8, functional interface, lambda expression
+--> reactive programmig --> it is about reacting to events, javascript, java
 
 
-spring boot 	--> 1.5.2.RELEASE
-spring cloud 	--> Dalston.SR3
-
-monolithic application --> back end + front end (module)
-microservices --> divide application into small application (web service/ service)
-
-e-commerce
---> customer app, product app, order app, vendor app, courier partner app, mobile ui, web based ui for desktop, web based ui for mobile, auth service
---> communication possible with xml/text file/json
---> http protocol (get, post, put, delete)
---> mainly it is rest application (spring rest / spring boot)
-
-discovery server
---> it will maintain information of all microservice in your application
---> it is design pattern
---> eureka server
-
---> first you should execute eureka
---> then producer
---> then consumer 
---> then check dashboard 
+sychronous  --> will execute program line by line 
+line 1	--> completed
+line 2	--> completed
+line 3	--> 5 minutes, wait for 5 minutes, then only it will switch to next line (blocking)
+line 4	--> completed
+line 5	--> completed
 
 
-Renews threshold	5	
-Renews (last min)	8
---> whenever you register microservice with discovery server, every client use to send heartbeat to eureka server
---> in every 30 seconds they use to send heartbeat signal, in every minute it will send 2 heartbeat signal
---> for 2 client you should receive 4 heart beat signal
---> eureka replicate its own instance
---> in current demo, eureka is replicating same instance (it is running 2 instances)
---> for 2 clients --> it will receive 8 heartbeat signals
-
---> if eureka server don't receive 2 heart beat signals then it will remove that instance from registry
---> if we don't recieve 1 heartbeat in 30 seconds, it will not remove it immediately, it will wait for another 60 seconds--> it will remove that instance after 90 seconds
---> minimum 5 heartbeat signals should receive from 2 clients
-
---> eureka server also works in self-preservation mode
---> even if you don't get required heartbeat signal, eureka will not remove from registry	--> self preservation
+asynchronous (non-blocking)
+line 1	--> completed
+line 2	--> completed
+line 3	--> 5 minutes, will submit this task in background, in mean time will switch to next line
+line 4	--> completed
+line 5	--> completed
+line 6	--> completed
+line 7	--> completed
+now output of line 3 is ready, process output of line 3 by main thread
+line 8	--> completed
+line 9	--> completed
+line 10	--> completed
 
 
-eureka server runs in 2 mode
---> normal 
---> self preservation
+--> event driven programming
+--> background thread will notify main thread using different events (processing, next, complete)
+--> event listener in this case would be main thread
+
+
+--> multithreading
+--> runnable, thread
+--> executor services
+--> forkandjoin
+--> in multithreading programming we will be getting output in future
+--> future interface is given to collect output of multithreading programming
+--> future is useful for doing asychronous programming
+--> isDone()--> will check whether task is completed or not --> blocking,  get()--> get output in future
+--> we cannot chain output of future object
+
+--> completablefuture (java 8)
+--> it will rich api for dealing with asychronous programming
+--> we can chain output of completablefuture very easily
+--> it is possible to combine multiple completeable future
+--> we can produce only one output
+--> we are not able to control how many records we should get --> backpressure
+
+reactive programming 
+--> asychronous
+--> event driven
+--> it will produce many output(push N message)
+--> responsive
+--> backpressure
+
+reactive programming in java
+--> project reactor 	--> training
+--> Rxjava
+--> Jdk9 flow reactive stream
+
+component of project reactor
+--> publisher --> it will publish unlimited inforomation in the form of events
+--> subscriber	--> it will subscribe to events which are published by publisher
+--> subscription	--> it is one to one relation between publisher and subscriber
+--> processor	--> data published by event will be processed by processor
+
+publisher --> netflix, youtube channel, amazon prime, e-magazine, e-newsletter
+subscriber --> user (you, me, anyone)
+subscriptiion --> subscription number
+processor --> download, view, trailer, rating, etc
+
+
+publisher --> NSE, BSE
+subscriber --> you, stock broker (zerodha, upstox, 5paisa)
+subscription --> relation between zerodha and nse+bse
+processor --> zerodha will show stock information on mobile app or web app
+
+database record(10)
+subscriber 	--> 	subscribe()	--> publisher
+subscriber	<--	subscription	<-- publisher
+subscriber 	--> request(3)		--> publisher
+		<-- onNext(10)
+		<-- onNext(15)
+		<-- onNext(107)
+		--> request (2)
+		<-- onNext(23)
+		<-- onNext(7654)
+		--> onRequest(5)
+		<-- onNext(34)
+		<-- onNext(54)
+		<-- onNext(53)
+		<-- onNext(52)
+		<-- onNext(76)
+
+		<-- onComplete()
+
+i subscribed to netflix 
+subscriber 			--> publisher
+		<-- onNext("xyz")
+		<-- onNext("abc")
+		<-- onNext(107)
+		<-- onNext(23)
+		<-- onNext(7654)
+		<-- onNext(34)
+		<-- onNext(54)
+		<-- onNext(53)
+		<-- onNext(52)
+		<-- onNext(76)
+
+		<-- onError
+
+
+publishers in java 
+--> mono	--> when you want to publish single  value	
+--> flux	--> when you want to publish multiple value then use flux
 
 
 
-eureka as discovery server (@EnableEurekaServer)
-producer and consumer are clients to eureka server (@EnableDiscoveryClient)
-
---------------------------------------------------------------------------------------------------------------------------------------------
-feign client
---> how to test restful application (programmer to application)? UI(swagger), postman 
---> how to test restful application (application to application)? resttemplate(imperative way to communicate between microservice)
---> it is useful for application to application communication just like resttemplate
---> in resttemplate we need to write everything
---> feignclient we just have to mention what to do. how to do will be implemented by framework at runtime (proxy design, JdkDynamicProxy)
-
-
---> imperative --> we mention what to do and how to do?
---> declarative --> we just mention what to do and how to do will be handled by framework
-
---> how to do error handling in feign clients? please implement on your own
---------------------------------------------------------------------------------------------------------------------------------------------
-ribbon
---> ribbon is client load balancer
---> server side load balancer : server will take decision which instance of MS will handle incoming request, we need to register instances manually, if we want to remove one of instance then also we need to it manually (api gateway)
---> client side load balancer : client itself will decide which instance of MS to call
---> ribbon will take decision which instance of MS to call
---> ribbon will take decision by communicating with eureka
---------------------------------------------------------------------------------------------------------------------------------------------
-actuators
---> it offers different endpoint
---> health status
---> how many has been created
---> which database using
---> shutdown
---> metrics and audit
-
-health status: http://localhost:8088/health
-beans: http://localhost:8088/beans 	==> it will return list of beans registered in spring container(WebApplicationContext)
-http://localhost:8088/env 	==> it will return list of environment variables
-http://localhost:8088/shutdown (POST) ==> it will stop your application, enable shutdown endpoint, disable security/add username password
-
-spring admin server
-spring boot client
-
-spring boot admin server
-spring boot client1, spring boot client2, spring boot client3
-we need to enable security for spring boot admin
 
 
 
-swagger	--> it will show only one service, testing
-admin-server--> show health status, application information
-eureka-server--> discover microservice
---------------------------------------------------------------------------------------------------------------------------------------------
-zipkin
---> it is implemention of distributed tracing design pattern
---> sleuth --> at the time of logging it will trace id and span id
---> zipkin --> we need ui for tracing request
 
-producer	--> zipkin
-consumer	--> zipkin
 
-questions?
+
+
