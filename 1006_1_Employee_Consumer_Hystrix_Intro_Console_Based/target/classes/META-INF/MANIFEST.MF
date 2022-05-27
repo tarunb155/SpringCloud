@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Built-By: t.bhatt
+Build-Jdk: 17.0.1
+Implementation-Title: 1006_1_Employee_Consumer_Hystrix_Intro_Console_Bas
+ ed
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.lkm.accenture
+Implementation-Vendor: Pivotal Software, Inc.
+Implementation-URL: http://projects.spring.io/spring-boot/1006_1_Employe
+ e_Consumer_Hystrix_Intro_Console_Based/
+Created-By: Maven Integration for Eclipse
+
