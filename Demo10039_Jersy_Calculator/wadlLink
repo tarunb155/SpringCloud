@@ -1,0 +1,17 @@
+http://localhost:8085/Demo10039_Jersy_Calculator/application.wadl
+
+
+help from
+http://stackoverflow.com/questions/19424000/how-to-generate-wadl-file-using-jersey-1-7
+
+study from:
+https://jersey.java.net/documentation/latest/wadl.html
+Jersey contains support for Web Application Description Language (WADL). 
+WADL is a XML description of a deployed RESTful web application. 
+It contains model of the deployed resources, their structure, supported media types, HTTP methods and so on. 
+In a sense, WADL is a similar to the WSDL (Web Service Description Language) which describes SOAP web services. 
+WADL is however specifically designed to describe RESTful Web resources.
+
+https://en.wikipedia.org/wiki/Web_Application_Description_Language
+
+http://www.restapitutorial.com/lessons/httpmethods.html
