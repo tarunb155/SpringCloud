@@ -1,0 +1,15 @@
+version: "3.7"
+
+services:
+ local:
+  image: dockercompose-scale-nginix-employee_service:1.0
+  expose: 
+   - "8090"
+ nginx:
+  image: nginx:latest
+  volumes: 
+   - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  depends_on:
+   - local
+  ports:
+   - "4000:4000"
