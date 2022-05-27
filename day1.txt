@@ -1,0 +1,141 @@
+day 1 
+spring fast track : spring cloud
+
+prerequisite
+--> spring core
+--> spring boot
+
+software
+--> jdk 1.8
+--> eclipse
+--> postman
+--> mysql
+
+virtual machine (AWS)
+
+
+spring cloud
+--> it is used to manage microservice
+--> microservice which created with help of spring boot(spring rest)
+--> we can manage microservice using many tools
+--> suggestive list of topics
+--> discovery server		==> done
+--> feign			==> done
+--> ribbon			==> done
+--> actuators			==> done
+--> zipkin
+--> elk
+--> api gateway
+--> config server
+--> hystrix
+--> message broker --> rabbitmq
+--> reactive microservices --> webflux
+--> security --> basic, oauth2.0
+--> deployment --> devops + cloud	--> deployment on aws
+
+
+spring boot 	--> 1.5.2.RELEASE
+spring cloud 	--> Dalston.SR3
+
+monolithic application --> back end + front end (module)
+microservices --> divide application into small application (web service/ service)
+
+e-commerce
+--> customer app, product app, order app, vendor app, courier partner app, mobile ui, web based ui for desktop, web based ui for mobile, auth service
+--> communication possible with xml/text file/json
+--> http protocol (get, post, put, delete)
+--> mainly it is rest application (spring rest / spring boot)
+
+discovery server
+--> it will maintain information of all microservice in your application
+--> it is design pattern
+--> eureka server
+
+--> first you should execute eureka
+--> then producer
+--> then consumer 
+--> then check dashboard 
+
+
+Renews threshold	5	
+Renews (last min)	8
+--> whenever you register microservice with discovery server, every client use to send heartbeat to eureka server
+--> in every 30 seconds they use to send heartbeat signal, in every minute it will send 2 heartbeat signal
+--> for 2 client you should receive 4 heart beat signal
+--> eureka replicate its own instance
+--> in current demo, eureka is replicating same instance (it is running 2 instances)
+--> for 2 clients --> it will receive 8 heartbeat signals
+
+--> if eureka server don't receive 2 heart beat signals then it will remove that instance from registry
+--> if we don't recieve 1 heartbeat in 30 seconds, it will not remove it immediately, it will wait for another 60 seconds--> it will remove that instance after 90 seconds
+--> minimum 5 heartbeat signals should receive from 2 clients
+
+--> eureka server also works in self-preservation mode
+--> even if you don't get required heartbeat signal, eureka will not remove from registry	--> self preservation
+
+
+eureka server runs in 2 mode
+--> normal 
+--> self preservation
+
+
+
+eureka as discovery server (@EnableEurekaServer)
+producer and consumer are clients to eureka server (@EnableDiscoveryClient)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+feign client
+--> how to test restful application (programmer to application)? UI(swagger), postman 
+--> how to test restful application (application to application)? resttemplate(imperative way to communicate between microservice)
+--> it is useful for application to application communication just like resttemplate
+--> in resttemplate we need to write everything
+--> feignclient we just have to mention what to do. how to do will be implemented by framework at runtime (proxy design, JdkDynamicProxy)
+
+
+--> imperative --> we mention what to do and how to do?
+--> declarative --> we just mention what to do and how to do will be handled by framework
+
+--> how to do error handling in feign clients? please implement on your own
+--------------------------------------------------------------------------------------------------------------------------------------------
+ribbon
+--> ribbon is client load balancer
+--> server side load balancer : server will take decision which instance of MS will handle incoming request, we need to register instances manually, if we want to remove one of instance then also we need to it manually (api gateway)
+--> client side load balancer : client itself will decide which instance of MS to call
+--> ribbon will take decision which instance of MS to call
+--> ribbon will take decision by communicating with eureka
+--------------------------------------------------------------------------------------------------------------------------------------------
+actuators
+--> it offers different endpoint
+--> health status
+--> how many has been created
+--> which database using
+--> shutdown
+--> metrics and audit
+
+health status: http://localhost:8088/health
+beans: http://localhost:8088/beans 	==> it will return list of beans registered in spring container(WebApplicationContext)
+http://localhost:8088/env 	==> it will return list of environment variables
+http://localhost:8088/shutdown (POST) ==> it will stop your application, enable shutdown endpoint, disable security/add username password
+
+spring admin server
+spring boot client
+
+spring boot admin server
+spring boot client1, spring boot client2, spring boot client3
+we need to enable security for spring boot admin
+
+
+
+swagger	--> it will show only one service, testing
+admin-server--> show health status, application information
+eureka-server--> discover microservice
+--------------------------------------------------------------------------------------------------------------------------------------------
+zipkin
+--> it is implemention of distributed tracing design pattern
+--> sleuth --> at the time of logging it will trace id and span id
+--> zipkin --> we need ui for tracing request
+
+producer	--> zipkin
+consumer	--> zipkin
+
+questions?
