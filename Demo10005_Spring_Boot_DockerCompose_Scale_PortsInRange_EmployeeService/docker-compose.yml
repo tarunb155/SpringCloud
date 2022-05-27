@@ -1,0 +1,7 @@
+version: "3.7"
+
+services:
+ local:
+  image: dockercompose-scale2-employee_service:1.0
+  ports: 
+   - "8080-8089:8090"
