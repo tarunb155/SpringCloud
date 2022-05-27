@@ -1,0 +1,62 @@
+1) Delete the already present server.properties file from Hsql folder to start the fresh database with below settings in server.properties(reference is tutorial point of HSQLDB)
+
+server.database.0 = file:hsqldb/demodb
+server.dbname.0 = testdb
+
+2) Run these two steps separately by doing cmd on hsqldb path
+java -classpath lib/hsqldb.jar org.hsqldb.server.Server
+java -classpath lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:hsql/demodb --dbname.0 testdb
+
+3) Now you can run the bat file runManagerSwing.bat present inside the bin folder. It will open the ui page then there give the setting name as HSQLDatabase Engine and url as jdbc:hsqldb:hsql://localhost/testdb
+
+4)Then create the table you want either manually or by using java jdbc code as below 
+
+/*C1*/SET SCHEMA SYSTEM_LOBS
+INSERT INTO BLOCKS VALUES(0,2147483647,0)
+COMMIT
+/*C2*/SET SCHEMA PUBLIC
+CREATE TABLE STUDENT(ROLL_NO INT NOT NULL, STUDENT_NAME VARCHAR(80), STUDENT_ADDRESS VARCHAR(80))
+/*C3*/SET SCHEMA PUBLIC
+INSERT INTO STUDENT VALUES(1,'aanchal','Lucknow')
+COMMIT
+DISCONNECT
+/*C4*/SET SCHEMA PUBLIC
+INSERT INTO STUDENT VALUES(2,'Barbie','Delhi')
+COMMIT
+DISCONNECT
+/*C5*/SET SCHEMA PUBLIC
+INSERT INTO STUDENT VALUES(3,'Sachin','Mumbai')
+COMMIT
+DISCONNECT
+/*C6*/SET SCHEMA PUBLIC
+DELETE FROM STUDENT WHERE ROLL_NO=1 AND STUDENT_NAME='aanchal' AND STUDENT_ADDRESS='Lucknow'
+COMMIT
+DISCONNECT
+/*C7*/SET SCHEMA PUBLIC
+INSERT INTO STUDENT VALUES(4,'Aditya','Punjab')
+COMMIT
+DISCONNECT
+/*C8*/SET SCHEMA PUBLIC
+INSERT INTO STUDENT VALUES(5,'Bablu','Delhi')
+COMMIT
+DISCONNECT
+/*C9*/SET SCHEMA PUBLIC
+DELETE FROM STUDENT WHERE ROLL_NO=2 AND STUDENT_NAME='Barbie' AND STUDENT_ADDRESS='Delhi'
+DELETE FROM STUDENT WHERE ROLL_NO=2 AND STUDENT_NAME='Barbie' AND STUDENT_ADDRESS='Delhi'
+COMMIT
+DISCONNECT
+/*C10*/SET SCHEMA PUBLIC
+INSERT INTO STUDENT VALUES(2,'Akshay','Kolkata')
+COMMIT
+INSERT INTO STUDENT VALUES(3,'Almer','Mumbai')
+COMMIT
+INSERT INTO STUDENT VALUES(4,'Ashwin','Chennai')
+COMMIT
+DISCONNECT
+/*C11*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C12*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C13*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C2*/DISCONNECT
