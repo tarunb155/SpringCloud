@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  docker-mysql:
+   container_name: docker-mysql
+   image: mysql:5.7
+   environment:
+    MYSQL_DATABASE: test
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_ROOT_HOST: '%'
+   volumes:
+      - my-db:/var/lib/mysql
+      - ./sql:/docker-entrypoint-initdb.d
+   ports:
+   - "3307:3306"
+   restart: always
+
+  local:
+   restart: on-failure
+   image: dockercompose-mysql-container-employee_jpadata_service:1.0
+   ports: 
+    - "8080:8090"
+   environment:
+    WAIT_HOSTS: mysql:3306
+   depends_on:
+    - docker-mysql
+
+volumes:
+  my-db:
+   name: my-db
+  
