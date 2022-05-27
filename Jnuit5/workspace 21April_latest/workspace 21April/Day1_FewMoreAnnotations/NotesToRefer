@@ -1,0 +1,11 @@
+Assumptions
+
+Assumptions is a collection of utility methods that support conditional test execution based on assumptions
+
+assumeTrue(boolean assumption)
+assumeTrue(boolean assumption,String message)
+assumeTrue(boolean assumption,Supplier)
+
+assumeFalse(boolean assumption)
+
+assumingThat(boolean assumption,executable)

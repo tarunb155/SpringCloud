@@ -1,0 +1,48 @@
+*************Day2***************
+@RepeatedTest
+@Parameterized Test
+@TestMethodOrder
+@Nested
+@TestFactory
+@EnabledOnOs
+@DisabledOnOs
+@EnabledIfEnviornmentVariable
+@DisabledIfEnviornmentVariable
+@EnabledOnJre
+@DisabledOnJre
+@Tag
+TestSuite
+@ExtendsWith
+
+Built-In Provider Classes
+TestInfo
+RepetitionInfo
+TestReporter
+
+
+
+TestFactory
+
+All the test are created using @Test annotation is static test case..
+A dynamic Test is atest that is generated at runTime by factory Method using @TestFactory annotation.
+
+The method marked with @TestFactory is not a test case rather it is a factory for test cases.
+
+Dependency Injection
+
+Junit5 offers built in classes that you can inject data into your test classes...In this way Junit offers 
+Dependency Injection
+
+Below Built-in providers already contain data that can b injected in your junit Test Case.
+
+TestInfo-Contains information about test class- as the display name, the test class, the test method, and associated tags
+RepetitionInfo-	Contains information about repeating test –current repetition, total repetitions etc.
+TestReporter-Contains information for the test run output- to publish any info to output.
+
+
+
+Declarative Extensions
+Junit5 offers extensions using @ExtendsWith
+
+
+Interface ParameterResolver
